@@ -7,6 +7,6 @@ import java.util.List;
  */
 public interface MvpProcessor {
 
-    String getMvp(List<String> csvFiles);
+    String getMvpNickname(List<String> csvFiles);
 
 }

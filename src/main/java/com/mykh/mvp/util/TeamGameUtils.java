@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -16,16 +17,14 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PRIVATE)
 public final class TeamGameUtils {
 
-    public static <T extends TeamPlayer> List<T> updateWinnerPlayers(List<T> players) {
-        Map<String, Integer> teamPoints = calculateTeamPoints(players);
+    public static <T extends TeamPlayer> List<T> updateWinnerPlayers(List<T> team) {
+        Map<String, Integer> teamPoints = calculateTeamPoints(team);
         final String winningTeam = findWinningTeam(teamPoints);
 
-        return players.stream()
+        return team.stream()
                 .peek(player -> {
                     if (player.getTeamName().equals(winningTeam)) {
-                        BigDecimal currentPoints = player.getRatingPoints();
-                        BigDecimal increasedPoints = currentPoints.add(new BigDecimal(10));
-                        player.setRatingPoints(increasedPoints);
+                        player.setWinner(true);
                     }
                 })
                 .toList();

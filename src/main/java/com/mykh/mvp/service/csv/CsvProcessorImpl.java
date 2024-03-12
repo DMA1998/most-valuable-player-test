@@ -1,6 +1,7 @@
 package com.mykh.mvp.service.csv;
 
 import com.mykh.mvp.converter.CsvConvertionStrategy;
+import com.mykh.mvp.exception.UnknownCsvType;
 import com.mykh.mvp.model.TeamPlayer;
 
 import java.io.BufferedReader;
@@ -38,7 +39,8 @@ public class CsvProcessorImpl implements CsvProcessor {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            throw new UnknownCsvType(String.format("Cannot identify sport type of the CSV file: [%s]", csv));
+
         }
 
         return name;

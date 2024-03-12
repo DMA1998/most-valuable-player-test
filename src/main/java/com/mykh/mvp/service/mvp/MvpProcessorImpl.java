@@ -21,7 +21,7 @@ public class MvpProcessorImpl<T extends TeamPlayer> implements MvpProcessor {
     }
 
     @Override
-    public String getMvp(List<String> csvFiles) {
+    public String getMvpNickname(List<String> csvFiles) {
         List<List<T>> listPlayers = csvProcessor.playersFromCsvRows(csvFiles);
 
         Map<String, Integer> playerPoints = calculatePlayerPoints(listPlayers);

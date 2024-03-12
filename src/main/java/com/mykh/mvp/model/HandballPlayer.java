@@ -1,6 +1,5 @@
 package com.mykh.mvp.model;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,9 +26,10 @@ public class HandballPlayer extends TeamPlayer {
 
     @Override
     public BigDecimal calculateRatingPoints() {
+        int winnerCounts = super.isWinner ? 10 : 0;
         int goalsMadePoints = this.goalsMade * 2;
 
-        return new BigDecimal(goalsMadePoints - this.goalsReceived);
+        return new BigDecimal(goalsMadePoints - this.goalsReceived + winnerCounts);
     }
 
 }

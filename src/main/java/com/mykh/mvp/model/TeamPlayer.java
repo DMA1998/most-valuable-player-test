@@ -1,11 +1,9 @@
 package com.mykh.mvp.model;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 /**
  * @author Dmytro Mykh on 11/03/2024
@@ -18,6 +16,7 @@ public abstract class TeamPlayer extends Player {
 
     public abstract BigDecimal calculateRatingPoints();
 
+    protected boolean isWinner;
     protected final String number;
     protected final String teamName;
     protected BigDecimal ratingPoints;
