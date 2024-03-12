@@ -21,7 +21,7 @@ import static lombok.AccessLevel.PRIVATE;
 
 @Slf4j
 @NoArgsConstructor(access = PRIVATE)
-public final class CsvConvertionStrategy {
+public final class CsvConvertStrategy {
 
     private static final ImmutableMap<SportType, TeamPlayerConverter> CSV_CONVERSION_MAP = ImmutableMap.<SportType, TeamPlayerConverter>builder()
             .put(SportType.BASKETBALL, new BasketballConverterTeam())
@@ -29,8 +29,8 @@ public final class CsvConvertionStrategy {
             //extend if needed
             .build();
 
-    public static <T extends TeamPlayer> List<T> getTeamPlayers(String header, String row) {
-        SportType type = parseHeaderType(header);
+    public static <T extends TeamPlayer> List<T> getTeamPlayers(String sportName, String row) {
+        SportType type = parseHeaderType(sportName);
 
         TeamPlayerConverter teamPlayerConverter = Optional.ofNullable(CSV_CONVERSION_MAP.get(type))
                 .orElseThrow(() -> {
@@ -41,14 +41,14 @@ public final class CsvConvertionStrategy {
         return teamPlayerConverter.convertFromCsv(row);
     }
 
-    private static SportType parseHeaderType(String header) {
+    private static SportType parseHeaderType(String sportName) {
         SportType type;
 
         try {
-            type = SportType.valueOf(header);
+            type = SportType.valueOf(sportName);
         } catch (Exception ex) {
-            log.error("Unknown CSV header received {}.", header);
-            throw new UnknownCsvType(String.format("Unknown CSV type received with header: [%s]", header));
+            log.error("Unknown CSV header received {}.", sportName);
+            throw new UnknownCsvType(String.format("Unknown CSV type received with header: [%s]", sportName));
         }
 
         return type;

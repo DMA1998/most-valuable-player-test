@@ -1,6 +1,6 @@
 package com.mykh.mvp.service.csv;
 
-import com.mykh.mvp.converter.CsvConvertionStrategy;
+import com.mykh.mvp.converter.CsvConvertStrategy;
 import com.mykh.mvp.exception.UnknownCsvType;
 import com.mykh.mvp.model.TeamPlayer;
 
@@ -21,7 +21,7 @@ public class CsvProcessorImpl implements CsvProcessor {
 
         for (String csvFile : csvFiles) {
             String sportName = extractCsvSportType(csvFile);
-            List<T> teamPlayers = CsvConvertionStrategy.getTeamPlayers(sportName, csvFile);
+            List<T> teamPlayers = CsvConvertStrategy.getTeamPlayers(sportName, csvFile);
             players.add(teamPlayers);
         }
 

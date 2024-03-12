@@ -11,12 +11,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 @RequiredArgsConstructor
 public abstract class Player {
 
     protected final String name;
-
-    @EqualsAndHashCode.Include
     protected final String nickname;
 
 }

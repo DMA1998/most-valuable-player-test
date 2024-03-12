@@ -1,12 +1,8 @@
 package com.mykh.mvp.service.mvp;
 
 import com.mykh.mvp.exception.UnknownCsvType;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 
 
-@ExtendWith(MockitoExtension.class)
 class MvpProcessorTest {
 
     private static final String CSV_PATH = "src/test/resources/csv/";

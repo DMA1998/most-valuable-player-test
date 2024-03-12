@@ -3,11 +3,9 @@ package com.mykh.mvp.util;
 import com.mykh.mvp.model.TeamPlayer;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -42,7 +40,7 @@ public final class TeamGameUtils {
         Map<String, Integer> teamPoints = new HashMap<>();
 
         for (T player : listPlayers) {
-            teamPoints.merge(player.getTeamName(), player.calculateRatingPoints().intValue(), Integer::sum);
+            teamPoints.merge(player.getTeamName(), player.getRatingPoints().intValue(), Integer::sum);
         }
 
         return teamPoints;

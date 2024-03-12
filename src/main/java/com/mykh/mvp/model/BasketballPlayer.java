@@ -1,5 +1,6 @@
 package com.mykh.mvp.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
+@EqualsAndHashCode(callSuper = true)
 public class BasketballPlayer extends TeamPlayer {
 
     private final int scoredPoint;
@@ -23,11 +25,11 @@ public class BasketballPlayer extends TeamPlayer {
         this.scoredPoint = scoredPoint;
         this.rebounds = rebounds;
         this.assists = assists;
-        setRatingPoints(calculateRatingPoints());
+        setRatingPoints(getRatingPoints());
     }
 
     @Override
-    public BigDecimal calculateRatingPoints() {
+    public BigDecimal getRatingPoints() {
         int winnerCounts = super.isWinner ? 10 : 0;
         int scoredPoints = this.scoredPoint * 2;
 

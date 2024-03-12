@@ -2,7 +2,6 @@ package com.mykh.mvp;
 
 import com.mykh.mvp.service.mvp.MvpProcessor;
 import com.mykh.mvp.service.mvp.MvpProcessorImpl;
-import lombok.SneakyThrows;
 
 import java.util.List;
 
@@ -13,10 +12,9 @@ import java.util.List;
 
 public class EntryPoint {
 
-    @SneakyThrows
     public static void main(String[] args) {
         MvpProcessor processor = new MvpProcessorImpl<>();
-        String mvpPlayer = processor.getMvpNickname(List.of("src/main/resources/csv/basketball.csv", "src/main/resources/csv/handball.csv"));
+        String mvpPlayer = processor.getMvpNickname(List.of("src/main/resources/basketball.csv", "src/main/resources/handball.csv"));
         System.out.println(mvpPlayer);
     }
 

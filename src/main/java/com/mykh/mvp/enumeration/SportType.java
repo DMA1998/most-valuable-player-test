@@ -5,6 +5,6 @@ package com.mykh.mvp.enumeration;
  */
 public enum SportType {
     BASKETBALL,
-    HANDBALL;
+    HANDBALL
 
 }

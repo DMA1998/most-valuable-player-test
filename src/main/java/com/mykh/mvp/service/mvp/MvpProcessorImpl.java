@@ -36,7 +36,7 @@ public class MvpProcessorImpl<T extends TeamPlayer> implements MvpProcessor {
         Map<String, Integer> playerPoints = new HashMap<>();
         for (List<T> players : listPlayers) {
             for (T player : players) {
-                playerPoints.merge(player.getNickname(), player.calculateRatingPoints().intValue(), Integer::sum);
+                playerPoints.merge(player.getNickname(), player.getRatingPoints().intValue(), Integer::sum);
             }
         }
 

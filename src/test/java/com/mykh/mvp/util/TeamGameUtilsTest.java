@@ -4,12 +4,9 @@ import com.mykh.mvp.model.BasketballPlayer;
 import com.mykh.mvp.model.HandballPlayer;
 import com.mykh.mvp.model.TeamPlayer;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,8 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Dmytro Mykh on 12/03/2024
  */
 
-
-@ExtendWith(MockitoExtension.class)
 class TeamGameUtilsTest<T> {
 
     @Test
@@ -63,7 +58,7 @@ class TeamGameUtilsTest<T> {
     private <T extends TeamPlayer> int countPoints(String teamName, List<T> team) {
         return team.stream()
                 .filter(p -> p.getTeamName().equals(teamName))
-                .map(TeamPlayer::calculateRatingPoints)
+                .map(TeamPlayer::getRatingPoints)
                 .map(BigDecimal::intValue)
                 .reduce(0, Integer::sum);
     }
@@ -76,7 +71,6 @@ class TeamGameUtilsTest<T> {
                 new BasketballPlayer("p3", "n3", "5", "Team B", 10, 2, 4),
                 new BasketballPlayer("p4", "n4", "7", "Team B", 1, 2, 3));
     }
-
 
     //TEAM C is a winner
     private List<HandballPlayer> prepareHandballPlayers() {
