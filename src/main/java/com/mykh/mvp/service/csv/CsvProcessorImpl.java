@@ -16,7 +16,7 @@ import java.util.List;
 public class CsvProcessorImpl implements CsvProcessor {
 
     @Override
-    public <T extends TeamPlayer> List<List<T>> playersFromCsvRows(List<String> csvFiles) {
+    public <T extends TeamPlayer> List<List<T>> getTeamPlayersFromCsvFiles(List<String> csvFiles) {
         List<List<T>> players = new ArrayList<>();
 
         for (String csvFile : csvFiles) {

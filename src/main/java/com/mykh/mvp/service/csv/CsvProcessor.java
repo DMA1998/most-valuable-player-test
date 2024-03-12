@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface CsvProcessor {
 
-    <T extends TeamPlayer> List<List<T>> playersFromCsvRows(List<String> csvFiles);
+    <T extends TeamPlayer> List<List<T>> getTeamPlayersFromCsvFiles(List<String> csvFiles);
 }
