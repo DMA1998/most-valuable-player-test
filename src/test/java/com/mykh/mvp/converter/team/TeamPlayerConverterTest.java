@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
     private static final String CSV_PATH = "src/test/resources/csv/";
     private static final String HANDBALL_CSV = CSV_PATH + "handball.csv";
     private static final String BASKETBALL_CSV = CSV_PATH + "basketball.csv";
+    private static final String BASKETBALL_CSV_NOT_UNIQUE_PLAYER = CSV_PATH + "basketball_not_unique_nickname.csv";
 
     private final BaseTeamConverter<BasketballPlayer> basketballConverterTeam = new BasketballConverterTeam();
 
@@ -40,6 +41,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
                 () -> basketballConverterTeam.convertFromCsv(HANDBALL_CSV));
 
         assertEquals("Index 6 out of bounds for length 6", ex.getMessage());
+    }
+
+    @Test
+    void testFailedPlayerWithoutUniqueNicknameFound() {
+        IllegalArgumentException ex = Assertions.assertThrows(IllegalArgumentException.class,
+                () -> basketballConverterTeam.convertFromCsv(BASKETBALL_CSV_NOT_UNIQUE_PLAYER));
+
+        assertEquals("Duplicated player found. Result is not valid: nick1", ex.getMessage());
     }
 
     private List<HandballPlayer> expectedHandballPlayers() {

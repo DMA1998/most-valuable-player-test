@@ -39,6 +39,7 @@ public abstract class BaseTeamConverter<T extends TeamPlayer> implements TeamPla
     @Override
     public List<T> convertFromCsv(String csv) {
         List<T> players = preparePlayers(csv);
+        TeamGameUtils.verifyUniqueNicknamePlayer(players);
         return TeamGameUtils.updateWinnerPlayers(players);
     }
 

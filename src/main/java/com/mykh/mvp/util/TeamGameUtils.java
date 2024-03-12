@@ -4,8 +4,10 @@ import com.mykh.mvp.model.TeamPlayer;
 import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static lombok.AccessLevel.PRIVATE;
 
@@ -14,6 +16,18 @@ import static lombok.AccessLevel.PRIVATE;
  */
 @NoArgsConstructor(access = PRIVATE)
 public final class TeamGameUtils {
+
+    public static <T extends TeamPlayer> void verifyUniqueNicknamePlayer(List<T> team) {
+        Set<String> uniqueNicknames = new HashSet<>();
+
+        for (T player : team) {
+            String nickname = player.getNickname();
+
+            if (!uniqueNicknames.add(nickname)) {
+                throw new IllegalArgumentException(String.format("Duplicated player found. Result is not valid: %s", nickname));
+            }
+        }
+    }
 
     public static <T extends TeamPlayer> List<T> updateWinnerPlayers(List<T> team) {
         Map<String, Integer> teamPoints = calculateTeamPoints(team);
