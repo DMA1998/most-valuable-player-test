@@ -7,17 +7,21 @@ import com.mykh.mvp.converter.team.TeamPlayerConverter;
 import com.mykh.mvp.enumeration.SportType;
 import com.mykh.mvp.exception.UnknownCsvType;
 import com.mykh.mvp.model.TeamPlayer;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Optional;
+
+import static lombok.AccessLevel.PRIVATE;
 
 /**
  * @author Dmytro Mykh on 11/03/2024
  */
 
 @Slf4j
-public class CsvConvertionStrategy {
+@NoArgsConstructor(access = PRIVATE)
+public final class CsvConvertionStrategy {
 
     private static final ImmutableMap<SportType, TeamPlayerConverter> CSV_CONVERSION_MAP = ImmutableMap.<SportType, TeamPlayerConverter>builder()
             .put(SportType.BASKETBALL, new BasketballConverterTeam())
@@ -25,8 +29,7 @@ public class CsvConvertionStrategy {
             //extend if needed
             .build();
 
-
-    public static <T extends TeamPlayer> List<T> convertTeamPlayers(String header, String row) {
+    public static <T extends TeamPlayer> List<T> getTeamPlayers(String header, String row) {
         SportType type = parseHeaderType(header);
 
         TeamPlayerConverter teamPlayerConverter = Optional.ofNullable(CSV_CONVERSION_MAP.get(type))
@@ -45,7 +48,7 @@ public class CsvConvertionStrategy {
             type = SportType.valueOf(header);
         } catch (Exception ex) {
             log.error("Unknown CSV header received {}.", header);
-            throw new UnknownCsvType(String.format("Unknown CSV type received with header: [%]", header));
+            throw new UnknownCsvType(String.format("Unknown CSV type received with header: [%s]", header));
         }
 
         return type;

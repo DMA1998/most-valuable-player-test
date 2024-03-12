@@ -17,7 +17,7 @@ public class MvpProcessorImpl<T extends TeamPlayer> implements MvpProcessor {
     private final CsvProcessor csvProcessor;
 
     public MvpProcessorImpl() {
-        this.csvProcessor = new CsvProcessorImpl<>();
+        this.csvProcessor = new CsvProcessorImpl();
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.mykh.mvp.util;
 
 import com.mykh.mvp.model.TeamPlayer;
-import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -15,7 +14,7 @@ import static lombok.AccessLevel.PRIVATE;
  * @author Dmytro Mykh on 12/03/2024
  */
 @NoArgsConstructor(access = PRIVATE)
-public final class GameUtils {
+public final class TeamGameUtils {
 
     public static <T extends TeamPlayer> List<T> updateWinnerPlayers(List<T> players) {
         Map<String, Integer> teamPoints = calculateTeamPoints(players);
@@ -24,7 +23,6 @@ public final class GameUtils {
         return players.stream()
                 .peek(player -> {
                     if (player.getTeamName().equals(winningTeam)) {
-                        player.calculateRatingPoints();
                         BigDecimal currentPoints = player.getRatingPoints();
                         BigDecimal increasedPoints = currentPoints.add(new BigDecimal(10));
                         player.setRatingPoints(increasedPoints);

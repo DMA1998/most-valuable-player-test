@@ -1,14 +1,17 @@
 package com.mykh.mvp.converter.team;
 
 import com.mykh.mvp.model.TeamPlayer;
+import com.mykh.mvp.util.TeamGameUtils;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
 import com.opencsv.exceptions.CsvValidationException;
+import lombok.SneakyThrows;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +33,28 @@ public abstract class BaseTeamConverter<T extends TeamPlayer> implements TeamPla
     protected static final String TEAM_NAME = "team name";
 
     protected abstract void fillPlayers(Map<String, Integer> csvHeaderIndexMap, String[] metadata, List<T> players);
+
+    protected abstract String getCsvHeader();
+
+    @Override
+    public List<T> convertFromCsv(String csv) {
+        List<T> players = preparePlayers(csv);
+        return TeamGameUtils.updateWinnerPlayers(players);
+    }
+
+    @SneakyThrows
+    private List<T> preparePlayers(String csv) {
+        List<T> players = new ArrayList<>();
+        List<String> rows = rowsFromCsv(csv);
+        Map<String, Integer> csvIndexMap = prepareCsvHeaderIndexMap(getCsvHeader());
+
+        rows.forEach(row -> {
+            String[] metadata = row.split(CSV_DELIMITER);
+            fillPlayers(csvIndexMap, metadata, players);
+        });
+
+        return players;
+    }
 
     protected List<String> rowsFromCsv(String csv) throws IOException, CsvException {
         List<String> rows;

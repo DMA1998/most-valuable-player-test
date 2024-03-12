@@ -1,10 +1,7 @@
 package com.mykh.mvp.converter.team;
 
 import com.mykh.mvp.model.HandballPlayer;
-import com.mykh.mvp.util.GameUtils;
-import lombok.SneakyThrows;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,21 +15,14 @@ public class HandballConverterTeam extends BaseTeamConverter<HandballPlayer> imp
     private static final String GOALS_RECEIVED = "goals received";
 
     @Override
-    @SneakyThrows
-    public List<HandballPlayer> convertFromCsv(String csv) {
-        List<HandballPlayer> players = new ArrayList<>();
-        List<String> rows = super.rowsFromCsv(csv);
-
-        Map<String, Integer> csvIndexMap = prepareCsvHeaderIndexMap(CSV_HEADER);
-
-        rows.forEach(row -> {
-            String[] metadata = row.split(CSV_DELIMITER);
-            fillPlayers(csvIndexMap, metadata, players);
-        });
-
-        return GameUtils.updateWinnerPlayers(players);
+    protected String getCsvHeader() {
+        return CSV_HEADER;
     }
 
+    @Override
+    public List<HandballPlayer> convertFromCsv(String csv) {
+        return super.convertFromCsv(csv);
+    }
 
     @Override
     protected void fillPlayers(Map<String, Integer> csvHeaderIndexMap, String[] metadata, List<HandballPlayer> players) {
